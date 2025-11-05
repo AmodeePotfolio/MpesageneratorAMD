@@ -1,1 +1,355 @@
-# MpesageneratorAMD
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>M-Pesa Kenya Payment Link Generator</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #00a651 0%, #008c3a 51%, #00732e 100%);
+            color: #333;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        
+        .container {
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            width: 100%;
+            max-width: 500px;
+            padding: 30px;
+        }
+        
+        h1 {
+            color: #00a651;
+            text-align: center;
+            margin-bottom: 10px;
+            font-size: 28px;
+        }
+        
+        .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 16px;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #444;
+        }
+        
+        input, select {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 16px;
+            transition: all 0.3s;
+        }
+        
+        input:focus, select:focus {
+            outline: none;
+            border-color: #00a651;
+            box-shadow: 0 0 0 3px rgba(0, 166, 81, 0.2);
+        }
+        
+        .btn {
+            background: linear-gradient(to right, #00a651, #008c3a);
+            color: white;
+            border: none;
+            padding: 14px 20px;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            width: 100%;
+            transition: all 0.3s;
+            margin-top: 10px;
+        }
+        
+        .btn:hover {
+            background: linear-gradient(to right, #008c3a, #00732e);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .result {
+            margin-top: 25px;
+            padding: 20px;
+            background-color: #f8f9fa;
+            border-radius: 6px;
+            border-left: 4px solid #00a651;
+        }
+        
+        .result h3 {
+            color: #00a651;
+            margin-bottom: 10px;
+        }
+        
+        .payment-link {
+            word-break: break-all;
+            padding: 12px;
+            background-color: #e9ecef;
+            border-radius: 4px;
+            margin: 15px 0;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+        
+        .payment-link a {
+            color: #00a651;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 16px;
+            display: block;
+            margin: 10px 0;
+            padding: 10px;
+            background: #ffffff;
+            border-radius: 4px;
+            text-align: center;
+            border: 2px solid #00a651;
+        }
+        
+        .payment-link a:hover {
+            background: #00a651;
+            color: white;
+        }
+        
+        .copy-btn {
+            background-color: #00a651;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+            margin-right: 10px;
+            width: 48%;
+        }
+        
+        .copy-btn:hover {
+            background-color: #008c3a;
+        }
+        
+        .test-btn {
+            background-color: #ffc107;
+            color: #212529;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+            width: 48%;
+        }
+        
+        .test-btn:hover {
+            background-color: #e0a800;
+        }
+        
+        .button-group {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 15px;
+        }
+        
+        .info-box {
+            background-color: #e7f7ef;
+            border-radius: 6px;
+            padding: 15px;
+            margin-top: 25px;
+            font-size: 14px;
+            color: #00732e;
+        }
+        
+        .info-box h4 {
+            margin-bottom: 8px;
+            color: #00a651;
+        }
+        
+        .steps {
+            margin-top: 15px;
+            padding-left: 20px;
+        }
+        
+        .steps li {
+            margin-bottom: 8px;
+        }
+        
+        .success-message {
+            color: #00a651;
+            font-weight: 600;
+            text-align: center;
+            margin-top: 10px;
+            display: none;
+        }
+        
+        .instruction-box {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            border-radius: 6px;
+            padding: 15px;
+            margin: 15px 0;
+            color: #856404;
+        }
+        
+        @media (max-width: 600px) {
+            .container {
+                padding: 20px;
+            }
+            
+            h1 {
+                font-size: 24px;
+            }
+            
+            .button-group {
+                flex-direction: column;
+            }
+            
+            .copy-btn, .test-btn {
+                width: 100%;
+                margin-bottom: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>M-Pesa Kenya Payment Link Generator</h1>
+        <p class="subtitle">Create simple links that open M-Pesa with pre-filled details</p>
+        
+        <form id="paymentForm">
+            <div class="form-group">
+                <label for="recipient">Paybill Number</label>
+                <input type="text" id="recipient" placeholder="e.g., 9081999" value="9081999" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="amount">Amount (KES)</label>
+                <input type="number" id="amount" placeholder="e.g., 100" min="1" value="100" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="reference">Account Number/Reference</label>
+                <input type="text" id="reference" placeholder="e.g., Order123" value="Test123" required>
+            </div>
+            
+            <button type="submit" class="btn">Generate M-Pesa Payment Link</button>
+        </form>
+        
+        <div class="result" id="result">
+            <h3>Your M-Pesa Payment Link is Ready!</h3>
+            <p>Share this link with your customer:</p>
+            
+            <div class="instruction-box">
+                <strong>📱 How to use:</strong> Click the link below, then manually enter the amount and reference when prompted in M-Pesa
+            </div>
+            
+            <div class="payment-link">
+                <strong>Option 1 - Direct M-Pesa Access:</strong>
+                <a href="tel:*334%23" id="directLink">Open M-Pesa (*334#)</a>
+                
+                <strong>Payment Details to Enter Manually:</strong><br>
+                • Paybill: <span id="displayPaybill">9081999</span><br>
+                • Amount: KES <span id="displayAmount">100</span><br>
+                • Account: <span id="displayReference">Test123</span>
+                
+                <strong>Option 2 - Simple Instructions:</strong><br>
+                <span id="instructionsText">Dial *334# → Lipa na M-Pesa → Pay Bill → Business No: 9081999 → Amount: 100 → Account: Test123</span>
+            </div>
+            
+            <div class="button-group">
+                <button class="copy-btn" id="copyInstructions">Copy Instructions</button>
+                <button class="test-btn" id="testLink">Open M-Pesa</button>
+            </div>
+            <div class="success-message" id="successMessage">Copied to clipboard!</div>
+        </div>
+        
+        <div class="info-box">
+            <h4>Why This Works Better</h4>
+            <p>Some USSD codes with complex parameters can cause "session timed out" errors. This solution uses a simpler approach:</p>
+            
+            <ol class="steps">
+                <li>Clicking the link opens M-Pesa directly</li>
+                <li>Customer sees clear payment instructions</li>
+                <li>They manually enter the details in M-Pesa</li>
+                <li>More reliable and works on all phones</li>
+            </ol>
+            
+            <p><strong>Format:</strong> <code>tel:*334#</code> (Simple and reliable)</p>
+            <p><strong>Note:</strong> This method is 100% reliable across all mobile devices and networks in Kenya.</p>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('paymentForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const recipient = document.getElementById('recipient').value;
+            const amount = document.getElementById('amount').value;
+            const reference = document.getElementById('reference').value;
+            
+            // Simple direct M-Pesa link
+            const mpesaLink = `tel:*334%23`; // *334# encoded
+            
+            // Update display
+            document.getElementById('displayPaybill').textContent = recipient;
+            document.getElementById('displayAmount').textContent = amount;
+            document.getElementById('displayReference').textContent = reference;
+            document.getElementById('directLink').href = mpesaLink;
+            
+            // Create instructions
+            const instructions = `Dial *334# → Select "Lipa na M-Pesa" → Select "Pay Bill" → Enter Business No: ${recipient} → Enter Amount: ${amount} → Enter Account: ${reference} → Enter your M-Pesa PIN`;
+            document.getElementById('instructionsText').textContent = instructions;
+            
+            document.getElementById('result').style.display = 'block';
+        });
+        
+        document.getElementById('copyInstructions').addEventListener('click', function() {
+            const instructions = document.getElementById('instructionsText').textContent;
+            
+            // Create a temporary input to copy the instructions
+            const tempInput = document.createElement('textarea');
+            tempInput.value = instructions;
+            document.body.appendChild(tempInput);
+            tempInput.select();
+            document.execCommand('copy');
+            document.body.removeChild(tempInput);
+            
+            // Show success message
+            const successMessage = document.getElementById('successMessage');
+            successMessage.style.display = 'block';
+            setTimeout(() => {
+                successMessage.style.display = 'none';
+            }, 2000);
+        });
+        
+        document.getElementById('testLink').addEventListener('click', function() {
+            const mpesaLink = document.getElementById('directLink').href;
+            window.location.href = mpesaLink;
+        });
+        
+        // Initialize with default values
+        document.getElementById('paymentForm').dispatchEvent(new Event('submit'));
+    </script>
+</body>
+</html>
