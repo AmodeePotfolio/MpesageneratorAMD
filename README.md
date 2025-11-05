@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -303,11 +303,11 @@
         <p class="subtitle">Secure & Instant Payment</p>
         
         <div class="payment-card">
-            <div class="amount">KES 1,500</div>
+            <div class="amount">KES 500-50K</div>
             <div class="details">
                 <div class="detail-item" style="animation-delay: 0.2s">
                     <span>Business:</span>
-                    <span>Your Business Name</span>
+                    <span>CHARTERED INVESTMENTS</span>
                 </div>
                 <div class="detail-item" style="animation-delay: 0.4s">
                     <span>Paybill:</span>
