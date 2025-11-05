@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>M-Pesa Kenya Payment Link Generator</title>
+    <title>Pay with M-Pesa Kenya</title>
     <style>
         * {
             margin: 0;
@@ -13,8 +13,12 @@
         }
         
         body {
-            background: linear-gradient(135deg, #00a651 0%, #008c3a 51%, #00732e 100%);
-            color: #333;
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), 
+                        url('https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            color: white;
             min-height: 100vh;
             display: flex;
             justify-content: center;
@@ -23,395 +27,378 @@
         }
         
         .container {
-            background-color: white;
-            border-radius: 12px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
             width: 100%;
-            max-width: 500px;
-            padding: 30px;
+            max-width: 450px;
+            padding: 40px 30px;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            animation: fadeInUp 1s ease-out;
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .logo {
+            width: 80px;
+            height: 80px;
+            background: #00a651;
+            border-radius: 50%;
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 40px;
+            font-weight: bold;
+            animation: bounce 2s infinite;
+            box-shadow: 0 10px 30px rgba(0, 166, 81, 0.4);
+        }
+        
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0);
+            }
+            40% {
+                transform: translateY(-10px);
+            }
+            60% {
+                transform: translateY(-5px);
+            }
         }
         
         h1 {
-            color: #00a651;
-            text-align: center;
+            font-size: 32px;
             margin-bottom: 10px;
-            font-size: 28px;
+            background: linear-gradient(45deg, #00a651, #80d4aa);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+        
+        @keyframes glow {
+            from {
+                text-shadow: 0 0 10px rgba(0, 166, 81, 0.5);
+            }
+            to {
+                text-shadow: 0 0 20px rgba(0, 166, 81, 0.8), 0 0 30px rgba(0, 166, 81, 0.6);
+            }
         }
         
         .subtitle {
-            text-align: center;
-            color: #666;
+            color: #ccc;
             margin-bottom: 30px;
             font-size: 16px;
+            animation: fadeIn 2s ease-out;
         }
         
-        .form-group {
-            margin-bottom: 20px;
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
         
-        label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: 600;
-            color: #444;
+        .payment-card {
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 15px;
+            padding: 25px;
+            margin: 25px 0;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            animation: slideInLeft 1s ease-out;
         }
         
-        input, select {
-            width: 100%;
-            padding: 12px 15px;
-            border: 1px solid #ddd;
-            border-radius: 6px;
-            font-size: 16px;
-            transition: all 0.3s;
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
         }
         
-        input:focus, select:focus {
-            outline: none;
-            border-color: #00a651;
-            box-shadow: 0 0 0 3px rgba(0, 166, 81, 0.2);
-        }
-        
-        .btn {
-            background: linear-gradient(to right, #00a651, #008c3a);
-            color: white;
-            border: none;
-            padding: 14px 20px;
-            border-radius: 6px;
-            font-size: 16px;
-            font-weight: 600;
-            cursor: pointer;
-            width: 100%;
-            transition: all 0.3s;
-            margin-top: 10px;
-        }
-        
-        .btn:hover {
-            background: linear-gradient(to right, #008c3a, #00732e);
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-        }
-        
-        .result {
-            margin-top: 25px;
-            padding: 20px;
-            background-color: #f8f9fa;
-            border-radius: 6px;
-            border-left: 4px solid #00a651;
-        }
-        
-        .result h3 {
+        .amount {
+            font-size: 48px;
+            font-weight: bold;
             color: #00a651;
-            margin-bottom: 10px;
-        }
-        
-        .payment-link {
-            word-break: break-all;
-            padding: 12px;
-            background-color: #e9ecef;
-            border-radius: 4px;
             margin: 15px 0;
-            font-size: 14px;
+            text-shadow: 0 5px 15px rgba(0, 166, 81, 0.3);
+            animation: pulse 2s infinite;
         }
         
-        .payment-link a {
-            color: #00a651;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 16px;
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
         }
         
-        .payment-link a:hover {
-            text-decoration: underline;
+        .details {
+            text-align: left;
+            margin: 20px 0;
         }
         
-        .copy-btn {
-            background-color: #00a651;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 6px;
-            cursor: pointer;
-            font-size: 16px;
-            transition: background-color 0.3s;
-            margin-right: 10px;
-            width: 48%;
-        }
-        
-        .copy-btn:hover {
-            background-color: #008c3a;
-        }
-        
-        .test-btn {
-            background-color: #ffc107;
-            color: #212529;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 6px;
-            cursor: pointer;
-            font-size: 16px;
-            transition: background-color 0.3s;
-            width: 48%;
-        }
-        
-        .test-btn:hover {
-            background-color: #e0a800;
-        }
-        
-        .button-group {
+        .detail-item {
             display: flex;
             justify-content: space-between;
-            margin-top: 15px;
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            animation: fadeIn 1s ease-out;
         }
         
-        .info-box {
-            background-color: #e7f7ef;
-            border-radius: 6px;
-            padding: 15px;
+        .detail-item:last-child {
+            border-bottom: none;
+        }
+        
+        .pay-btn {
+            background: linear-gradient(45deg, #00a651, #008c3a);
+            color: white;
+            border: none;
+            padding: 18px 40px;
+            border-radius: 50px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            width: 100%;
+            transition: all 0.3s ease;
+            margin: 20px 0;
+            box-shadow: 0 10px 30px rgba(0, 166, 81, 0.4);
+            position: relative;
+            overflow: hidden;
+            animation: slideInRight 1s ease-out;
+        }
+        
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        .pay-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(0, 166, 81, 0.6);
+            background: linear-gradient(45deg, #008c3a, #00732e);
+        }
+        
+        .pay-btn:active {
+            transform: translateY(0);
+        }
+        
+        .pay-btn::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: 0.5s;
+        }
+        
+        .pay-btn:hover::after {
+            left: 100%;
+        }
+        
+        .instructions {
+            background: rgba(0, 166, 81, 0.2);
+            border-radius: 10px;
+            padding: 20px;
             margin-top: 25px;
-            font-size: 14px;
-            color: #00732e;
+            border-left: 4px solid #00a651;
+            animation: fadeIn 1.5s ease-out;
         }
         
-        .info-box h4 {
-            margin-bottom: 8px;
-            color: #00a651;
+        .instructions h3 {
+            color: #80d4aa;
+            margin-bottom: 10px;
+            font-size: 16px;
         }
         
         .steps {
-            margin-top: 15px;
-            padding-left: 20px;
+            text-align: left;
+            font-size: 14px;
+            color: #ccc;
         }
         
         .steps li {
             margin-bottom: 8px;
+            padding-left: 5px;
         }
         
-        .success-message {
-            color: #00a651;
-            font-weight: 600;
-            text-align: center;
-            margin-top: 10px;
+        .loading {
             display: none;
+            margin: 20px 0;
         }
         
-        .payment-type {
-            display: flex;
-            gap: 15px;
-            margin-bottom: 20px;
+        .loader {
+            width: 40px;
+            height: 40px;
+            border: 4px solid rgba(255,255,255,0.3);
+            border-top: 4px solid #00a651;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto;
         }
         
-        .payment-option {
-            flex: 1;
-            text-align: center;
-            padding: 15px;
-            border: 2px solid #ddd;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: all 0.3s;
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
         
-        .payment-option.selected {
-            border-color: #00a651;
-            background-color: #e7f7ef;
+        .countdown {
+            font-size: 14px;
+            color: #80d4aa;
+            margin-top: 10px;
         }
         
-        .payment-option h4 {
-            color: #00a651;
-            margin-bottom: 5px;
+        .floating {
+            animation: floating 3s ease-in-out infinite;
         }
         
-        @media (max-width: 600px) {
+        @keyframes floating {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        @media (max-width: 480px) {
             .container {
-                padding: 20px;
+                padding: 30px 20px;
+                margin: 10px;
             }
             
             h1 {
-                font-size: 24px;
+                font-size: 28px;
             }
             
-            .button-group {
-                flex-direction: column;
+            .amount {
+                font-size: 36px;
             }
             
-            .copy-btn, .test-btn {
-                width: 100%;
-                margin-bottom: 10px;
-            }
-            
-            .payment-type {
-                flex-direction: column;
+            .pay-btn {
+                padding: 16px 30px;
+                font-size: 16px;
             }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>M-Pesa Kenya Payment Link Generator</h1>
-        <p class="subtitle">Create payment links that redirect users to M-Pesa *334# menu</p>
+    <div class="container floating">
+        <div class="logo">M</div>
+        <h1>Pay with M-Pesa</h1>
+        <p class="subtitle">Secure & Instant Payment</p>
         
-        <div class="payment-type">
-            <div class="payment-option selected" id="paybillOption">
-                <h4>Pay Business</h4>
-                <p>Paybill Number</p>
-            </div>
-            <div class="payment-option" id="tillOption">
-                <h4>Buy Goods</h4>
-                <p>Till Number</p>
-            </div>
-            <div class="payment-option" id="sendMoneyOption">
-                <h4>Send Money</h4>
-                <p>Phone Number</p>
+        <div class="payment-card">
+            <div class="amount">KES 1,500</div>
+            <div class="details">
+                <div class="detail-item" style="animation-delay: 0.2s">
+                    <span>Business:</span>
+                    <span>Your Business Name</span>
+                </div>
+                <div class="detail-item" style="animation-delay: 0.4s">
+                    <span>Paybill:</span>
+                    <span>9081999</span>
+                </div>
+                <div class="detail-item" style="animation-delay: 0.6s">
+                    <span>Account:</span>
+                    <span>ORDER123</span>
+                </div>
             </div>
         </div>
         
-        <form id="paymentForm">
-            <div class="form-group">
-                <label for="recipient">Recipient Number</label>
-                <input type="text" id="recipient" placeholder="e.g., 9081999 or 0712345678" value="9081999" required>
-            </div>
-            
-            <div class="form-group">
-                <label for="amount">Amount (KES)</label>
-                <input type="number" id="amount" placeholder="e.g., 100" min="1" value="100" required>
-            </div>
-            
-            <div class="form-group">
-                <label for="reference">Payment Reference</label>
-                <input type="text" id="reference" placeholder="e.g., Order #12345" value="Test Payment" required>
-            </div>
-            
-            <button type="submit" class="btn">Generate M-Pesa Payment Link</button>
-        </form>
+        <button class="pay-btn" id="payButton">
+            💰 PAY NOW
+        </button>
         
-        <div class="result" id="result">
-            <h3>Your M-Pesa Payment Link is Ready!</h3>
-            <p>Share this link with your customer to receive payment:</p>
-            <div class="payment-link">
-                <strong>USSD Code:</strong> <span id="ussdCode">*334*1*1*9081999*100*Test Payment#</span><br><br>
-                <strong>Payment Link:</strong> <a href="tel:*334*1*1*9081999*100*Test Payment#" id="generatedLink">Click to Pay with M-Pesa</a>
-            </div>
-            <div class="button-group">
-                <button class="copy-btn" id="copyBtn">Copy Link</button>
-                <button class="test-btn" id="testBtn">Test Link</button>
-            </div>
-            <div class="success-message" id="successMessage">Link copied to clipboard!</div>
+        <div class="loading" id="loading">
+            <div class="loader"></div>
+            <div class="countdown" id="countdown">Redirecting in 3 seconds...</div>
         </div>
         
-        <div class="info-box">
-            <h4>How It Works - M-Pesa Kenya (*334#)</h4>
-            <p>This generator creates a custom link that redirects users to initiate an M-Pesa payment via the official *334# USSD code.</p>
-            
-            <h4>Steps for Customer:</h4>
-            <ol class="steps">
-                <li>Click the payment link on their phone</li>
-                <li>Phone dialer opens with USSD code pre-filled</li>
-                <li>They press "Call" or "Send" to open M-Pesa</li>
-                <li>They enter M-Pesa PIN to complete payment</li>
-                <li>Payment is processed instantly</li>
-            </ol>
-            
-            <p><strong>Format:</strong> <code>tel:*334*1*1*Paybill*Amount*Reference#</code></p>
-            <p><strong>Note:</strong> This uses the official M-Pesa Kenya USSD code *334# and works on all phones.</p>
+        <div class="instructions">
+            <h3>📱 Payment Instructions</h3>
+            <ul class="steps">
+                <li>Click "PAY NOW" button above</li>
+                <li>Your phone will open M-Pesa USSD menu</li>
+                <li>Follow the prompts to complete payment</li>
+                <li>Enter your M-Pesa PIN when prompted</li>
+                <li>You'll receive confirmation via SMS</li>
+            </ul>
         </div>
     </div>
 
     <script>
-        let paymentType = 'paybill'; // Default to Paybill
-        
-        // Payment type selection
-        document.getElementById('paybillOption').addEventListener('click', function() {
-            paymentType = 'paybill';
-            updatePaymentType();
-            updatePlaceholder();
-        });
-        
-        document.getElementById('tillOption').addEventListener('click', function() {
-            paymentType = 'till';
-            updatePaymentType();
-            updatePlaceholder();
-        });
-        
-        document.getElementById('sendMoneyOption').addEventListener('click', function() {
-            paymentType = 'sendMoney';
-            updatePaymentType();
-            updatePlaceholder();
-        });
-        
-        function updatePaymentType() {
-            // Remove selected class from all
-            document.querySelectorAll('.payment-option').forEach(option => {
-                option.classList.remove('selected');
-            });
+        document.getElementById('payButton').addEventListener('click', function() {
+            const button = this;
+            const loading = document.getElementById('loading');
+            const countdown = document.getElementById('countdown');
             
-            // Add selected class to current
-            document.getElementById(paymentType + 'Option').classList.add('selected');
-        }
-        
-        function updatePlaceholder() {
-            const recipientInput = document.getElementById('recipient');
-            if (paymentType === 'sendMoney') {
-                recipientInput.placeholder = 'e.g., 0712345678';
-                recipientInput.value = '0712345678';
-            } else {
-                recipientInput.placeholder = 'e.g., 9081999';
-                recipientInput.value = '9081999';
-            }
-        }
-        
-        document.getElementById('paymentForm').addEventListener('submit', function(e) {
-            e.preventDefault();
+            // Show loading animation
+            button.style.display = 'none';
+            loading.style.display = 'block';
             
-            const recipient = document.getElementById('recipient').value;
-            const amount = document.getElementById('amount').value;
-            const reference = document.getElementById('reference').value;
+            // Countdown animation
+            let seconds = 3;
+            const countdownInterval = setInterval(() => {
+                countdown.textContent = `Redirecting in ${seconds} seconds...`;
+                seconds--;
+                
+                if (seconds < 0) {
+                    clearInterval(countdownInterval);
+                    // Redirect to M-Pesa USSD
+                    window.location.href = 'tel:*334%23';
+                }
+            }, 1000);
             
-            let ussdCode;
-            
-            if (paymentType === 'sendMoney') {
-                // Send Money format: *334*1*1*Phone*Amount*Reference#
-                ussdCode = `*334*1*1*${recipient}*${amount}*${reference}#`;
-            } else {
-                // Paybill/Till format: *334*1*1*Number*Amount*Reference#
-                ussdCode = `*334*1*1*${recipient}*${amount}*${reference}#`;
-            }
-            
-            const paymentLink = `tel:${ussdCode}`;
-            
-            // Update the display
-            document.getElementById('ussdCode').textContent = ussdCode;
-            const generatedLink = document.getElementById('generatedLink');
-            generatedLink.href = paymentLink;
-            generatedLink.textContent = 'Click to Pay with M-Pesa Kenya';
-            
-            document.getElementById('result').style.display = 'block';
-        });
-        
-        document.getElementById('copyBtn').addEventListener('click', function() {
-            const link = document.getElementById('generatedLink').href;
-            
-            // Create a temporary input to copy the link
-            const tempInput = document.createElement('input');
-            tempInput.value = link;
-            document.body.appendChild(tempInput);
-            tempInput.select();
-            document.execCommand('copy');
-            document.body.removeChild(tempInput);
-            
-            // Show success message
-            const successMessage = document.getElementById('successMessage');
-            successMessage.style.display = 'block';
+            // Fallback: If redirect doesn't work, show instructions
             setTimeout(() => {
-                successMessage.style.display = 'none';
-            }, 2000);
+                if (!document.hidden) {
+                    loading.innerHTML = '<div style="color: #80d4aa;">📞 Please dial *334# manually on your phone</div>';
+                }
+            }, 5000);
         });
         
-        document.getElementById('testBtn').addEventListener('click', function() {
-            const paymentLink = document.getElementById('generatedLink').href;
-            window.location.href = paymentLink;
+        // Add some interactive effects
+        document.addEventListener('mousemove', (e) => {
+            const container = document.querySelector('.container');
+            const xAxis = (window.innerWidth / 2 - e.pageX) / 25;
+            const yAxis = (window.innerHeight / 2 - e.pageY) / 25;
+            container.style.transform = `rotateY(${xAxis}deg) rotateX(${yAxis}deg)`;
         });
         
-        // Initialize
-        updatePlaceholder();
+        // Reset transform when mouse leaves
+        document.querySelector('.container').addEventListener('mouseleave', (e) => {
+            e.target.style.transform = 'rotateY(0deg) rotateX(0deg)';
+            e.target.style.transition = 'transform 0.5s ease';
+        });
+        
+        // Add entrance animation to elements
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animationPlayState = 'running';
+                }
+            });
+        });
+        
+        // Observe all animated elements
+        document.querySelectorAll('.container, .payment-card, .pay-btn, .instructions').forEach(el => {
+            observer.observe(el);
+        });
     </script>
 </body>
 </html>
